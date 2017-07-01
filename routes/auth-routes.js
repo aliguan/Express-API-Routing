@@ -44,7 +44,6 @@ authRoutes.post('/signup', (req, res, next) => {
 
         res.status(200).json(req.user);
       });
-      }
     });
   });
 });
@@ -95,3 +94,5 @@ authRoutes.get('/private', (req, res, next) => {
 
   res.status(403).json({ message: 'Unauthorized' });
 });
+
+module.exports = authRoutes;

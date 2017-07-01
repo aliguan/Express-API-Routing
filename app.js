@@ -6,14 +6,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
-const session      = require('express-session');
-const passport     = require('passport');
-
-
-mongoose.connect('mongodb://localhost/angular-auth');
+const session    = require('express-session');
+const passport   = require('passport');
 
 const passportSetup = require('./config/passport');
 passportSetup(passport);
+
+mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
 
@@ -43,14 +42,15 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 const index = require('./routes/index');
 app.use('/', index);
 
 const authRoutes = require('./routes/auth-routes');
 app.use('/', authRoutes);
 
-app.use((req, res, next) => { 
-  res.sendfile(__dirname + '/public/index.html');  
+app.use( (req, res, next) => { 
+  res.sendfile( __dirname + '/public/index.html');  
 }); 
 
 
