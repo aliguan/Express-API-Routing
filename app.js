@@ -8,7 +8,7 @@ const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
 const session    = require('express-session');
 const passport   = require('passport');
-const env = require('dotenv');
+const dotenv = require('dotenv');
 
 const passportSetup = require('./config/passport');
 passportSetup(passport);
@@ -16,7 +16,7 @@ passportSetup(passport);
 mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
-require("dotenv").config();
+require('dotenv').config();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
